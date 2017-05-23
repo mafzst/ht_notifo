@@ -21,6 +21,16 @@ public class MainActivity extends AppCompatActivity {
         // Get the Notification Manager service
         final NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
+        /////////// GROUPS BUILDING ///////////
+
+        String group_1_id = "group_1";
+        CharSequence group_1_name = "Server 1";
+        notificationManager.createNotificationChannelGroup(new NotificationChannelGroup(group_1_id, group_1_name));
+
+        String group_2_id = "group_2";
+        CharSequence group_2_name = "Server 2";
+        notificationManager.createNotificationChannelGroup(new NotificationChannelGroup(group_2_id, group_2_name));
+
         /////////// CHANNELS BUILDING ///////////
 
         /*/***************************************
@@ -54,8 +64,38 @@ public class MainActivity extends AppCompatActivity {
         urgent_channel.setLightColor(urgent_color);
         urgent_channel.enableVibration(urgent_vibration);
         urgent_channel.setVibrationPattern(urgent_pattern);
+        urgent_channel.setGroup(group_1_id);
         // Add channel to notification manager
         notificationManager.createNotificationChannel(urgent_channel);
+
+
+        // Channel ID
+        final String urgent_2_id = "channel_urgent_2";
+        // Channel friendly name (for user)
+        CharSequence urgent_2_name = "Urgent notifications";
+        // Channel description
+        String urgent_2_description = "Urgent notifications like server crashes";
+        // Channel importance
+        int urgent_2_importance = NotificationManager.IMPORTANCE_HIGH;
+        // Is flashlight enabled?
+        boolean urgent_2_flashlight = true;
+        // If so what color?
+        int urgent_2_color = Color.RED;
+        // Is vibration enabled?
+        boolean urgent_2_vibration = true;
+        // What pattern?
+        long[] urgent_2_pattern = {100, 200, 300, 400, 500, 400, 300, 200, 400};
+
+        // Create channel and configure it
+        NotificationChannel urgent_2_channel = new NotificationChannel(urgent_2_id, urgent_2_name, urgent_2_importance);
+        urgent_2_channel.setDescription(urgent_2_description);
+        urgent_2_channel.enableLights(urgent_2_flashlight);
+        urgent_2_channel.setLightColor(urgent_2_color);
+        urgent_2_channel.enableVibration(urgent_2_vibration);
+        urgent_2_channel.setVibrationPattern(urgent_2_pattern);
+        urgent_2_channel.setGroup(group_2_id);
+        // Add channel to notification manager
+        notificationManager.createNotificationChannel(urgent_2_channel);
 
         /*/***************************************
         Normal notification channel: channel_normal
@@ -88,8 +128,37 @@ public class MainActivity extends AppCompatActivity {
         normal_channel.setLightColor(normal_color);
         normal_channel.enableVibration(normal_vibration);
         normal_channel.setVibrationPattern(normal_pattern);
+        normal_channel.setGroup(group_1_id);
         // Add channel to notification manager
         notificationManager.createNotificationChannel(normal_channel);
+
+        // Channel ID
+        final String normal_2_id = "channel_normal_2";
+        // Channel friendly name (for user)
+        CharSequence normal_2_name = "Normal notifications";
+        // Channel description
+        String normal_2_description = "Normal notifications like daily reports";
+        // Channel importance
+        int normal_2_importance = NotificationManager.IMPORTANCE_DEFAULT;
+        // Is flashlight enabled?
+        boolean normal_2_flashlight = true;
+        // If so what color?
+        int normal_2_color = Color.BLUE;
+        // Is vibration enabled?
+        boolean normal_2_vibration = true;
+        // What pattern?
+        long[] normal_2_pattern = {0, 200, 300};
+
+        // Create channel and configure it
+        NotificationChannel normal_2_channel = new NotificationChannel(normal_2_id, normal_2_name, normal_2_importance);
+        normal_2_channel.setDescription(normal_2_description);
+        normal_2_channel.enableLights(normal_2_flashlight);
+        normal_2_channel.setLightColor(normal_2_color);
+        normal_2_channel.enableVibration(normal_2_vibration);
+        normal_2_channel.setVibrationPattern(normal_2_pattern);
+        normal_2_channel.setGroup(group_2_id);
+        // Add channel to notification manager
+        notificationManager.createNotificationChannel(normal_2_channel);
 
         /*/***************************************
         Not important notification channel: channel_not_important
@@ -122,18 +191,37 @@ public class MainActivity extends AppCompatActivity {
         not_important_channel.setLightColor(not_important_color);
         not_important_channel.enableVibration(not_important_vibration);
         not_important_channel.setVibrationPattern(not_important_pattern);
+        not_important_channel.setGroup(group_1_id);
         // Add channel to notification manager
         notificationManager.createNotificationChannel(not_important_channel);
 
-        /////////// GROUPS BUILDING ///////////
+        // Channel ID
+        final String not_important_2_id = "channel_not_important_2";
+        // Channel friendly name (for user)
+        CharSequence not_important_2_name = "Not important notifications";
+        // Channel description
+        String not_important_2_description = "Not important notifications like new SSH login";
+        // Channel importance
+        int not_important_2_importance = NotificationManager.IMPORTANCE_LOW;
+        // Is flashlight enabled?
+        boolean not_important_2_flashlight = false;
+        // If so what color?
+        int not_important_2_color = Color.BLUE;
+        // Is vibration enabled?
+        boolean not_important_2_vibration = false;
+        // What pattern?
+        long[] not_important_2_pattern = {0, 200, 300};
 
-        String group_1_id = "group_1";
-        CharSequence group_1_name = "Server 1";
-        notificationManager.createNotificationChannelGroup(new NotificationChannelGroup(group_1_id, group_1_name));
-
-        String group_2_id = "group_1";
-        CharSequence group_2_name = "Server 2";
-        notificationManager.createNotificationChannelGroup(new NotificationChannelGroup(group_2_id, group_2_name));
+        // Create channel and configure it
+        NotificationChannel not_important_2_channel = new NotificationChannel(not_important_2_id, not_important_2_name, not_important_2_importance);
+        not_important_2_channel.setDescription(not_important_2_description);
+        not_important_2_channel.enableLights(not_important_2_flashlight);
+        not_important_2_channel.setLightColor(not_important_2_color);
+        not_important_2_channel.enableVibration(not_important_2_vibration);
+        not_important_2_channel.setVibrationPattern(not_important_2_pattern);
+        not_important_2_channel.setGroup(group_2_id);
+        // Add channel to notification manager
+        notificationManager.createNotificationChannel(not_important_2_channel);
 
         /////////// NOTIFICATIONS BUILDING ///////////
 
@@ -142,7 +230,6 @@ public class MainActivity extends AppCompatActivity {
                 .setContentText("Your server crashed!")
                 .setSmallIcon(R.drawable.ic_notif)
                 .setChannel(urgent_id)
-                .setGroup(group_1_id)
                 .setColorized(true)
                 .setColor(0xFF7F0000)
                 .build();
@@ -152,7 +239,6 @@ public class MainActivity extends AppCompatActivity {
                 .setContentText("Your daily log analysis")
                 .setSmallIcon(R.drawable.ic_notif)
                 .setChannel(normal_id)
-                .setGroup(group_1_id)
                 .setColorized(true)
                 .setColor(0xFF00007F)
                 .build();
@@ -162,7 +248,6 @@ public class MainActivity extends AppCompatActivity {
                 .setContentText("New SSH connection from 192.168.0.145")
                 .setSmallIcon(R.drawable.ic_notif)
                 .setChannel(not_important_id)
-                .setGroup(group_1_id)
                 .setColorized(true)
                 .build();
 
@@ -170,8 +255,7 @@ public class MainActivity extends AppCompatActivity {
                 .setContentTitle("[2] Urgent!")
                 .setContentText("Your server crashed!")
                 .setSmallIcon(R.drawable.ic_notif)
-                .setChannel(urgent_id)
-                .setGroup(group_2_id)
+                .setChannel(urgent_2_id)
                 .setColorized(true)
                 .setColor(0xFF7F0000)
                 .build();
@@ -180,7 +264,7 @@ public class MainActivity extends AppCompatActivity {
                 .setContentTitle("[2] Normal")
                 .setContentText("Your daily log analysis")
                 .setSmallIcon(R.drawable.ic_notif)
-                .setChannel(normal_id)
+                .setChannel(normal_2_id)
                 .setGroup(group_2_id)
                 .setColorized(true)
                 .setColor(0xFF00007F)
@@ -190,8 +274,7 @@ public class MainActivity extends AppCompatActivity {
                 .setContentTitle("[2] Not important")
                 .setContentText("New SSH connection from 192.168.0.145")
                 .setSmallIcon(R.drawable.ic_notif)
-                .setChannel(not_important_id)
-                .setGroup(group_2_id)
+                .setChannel(not_important_2_id)
                 .setColorized(true)
                 .build();
 
